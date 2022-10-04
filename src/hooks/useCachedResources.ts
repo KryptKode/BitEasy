@@ -1,33 +1,34 @@
 import { Ionicons } from "@expo/vector-icons";
-import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import * as React from "react";
+import {
+    useFonts,
+    Poppins_400Regular,
+    Poppins_500Medium,
+    Poppins_600SemiBold,
+    Poppins_700Bold,
+} from "@expo-google-fonts/poppins";
 
 export default function useCachedResources() {
-    const [isLoadingComplete, setLoadingComplete] = React.useState(false);
+    let [fontsLoaded] = useFonts({
+        ...Ionicons.font,
+        Poppins_400Regular,
+        Poppins_500Medium,
+        Poppins_600SemiBold,
+        Poppins_700Bold,
+    });
 
-    // Load any resources or data that we need prior to rendering the app
     React.useEffect(() => {
-        async function loadResourcesAndDataAsync() {
-            try {
-                SplashScreen.preventAutoHideAsync();
+        init();
+    }, [fontsLoaded]);
 
-                // Load fonts
-                await Font.loadAsync({
-                    ...Ionicons.font,
-                    "space-mono": require("../assets/fonts/SpaceMono-Regular.ttf"),
-                });
-            } catch (e) {
-                // We might want to provide this error information to an error reporting service
-                console.warn(e);
-            } finally {
-                setLoadingComplete(true);
-                SplashScreen.hideAsync();
-            }
+    const init = async () => {
+        if (!fontsLoaded) {
+            await SplashScreen.preventAutoHideAsync();
+        } else {
+            await SplashScreen.hideAsync();
         }
+    };
 
-        loadResourcesAndDataAsync();
-    }, []);
-
-    return isLoadingComplete;
+    return fontsLoaded;
 }
