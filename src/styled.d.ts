@@ -9,6 +9,23 @@ interface IPalette {
     extraStrong?: string;
 }
 
+interface BrandPalette {
+    dark: string;
+    default: string;
+    light?: string;
+}
+
+interface TextPalette {
+    soft: string;
+    default: string;
+    onPrimary: string;
+    onSurface: string;
+    onSecondary: string;
+    strong?: string;
+    extraStrong?: string;
+    disabled?: string;
+}
+
 declare module "styled-components/native" {
     export interface DefaultTheme {
         colors: {
@@ -17,12 +34,14 @@ declare module "styled-components/native" {
             tint: string;
             tabIconDefault: string;
             tabIconSelected: string;
-            text: IPalette;
+            onboardingTopSurface: string;
+            onboardingIndicatorInActive: string;
+            text: TextPalette;
             surface: IPalette;
-            primary: IPalette;
-            secondary: IPalette;
-            success: IPalette;
-            danger: IPalette;
+            primary: BrandPalette;
+            secondary: BrandPalette;
+            success: BrandPalette;
+            danger: BrandPalette;
         };
         fontFamily: {
             regular: string;
