@@ -13,18 +13,7 @@ const linking: LinkingOptions<RootStackParamList> = {
     config: {
         screens: {
             Root: {
-                screens: {
-                    TabOne: {
-                        screens: {
-                            TabOneScreen: "one",
-                        },
-                    },
-                    TabTwo: {
-                        screens: {
-                            TabTwoScreen: "two",
-                        },
-                    },
-                },
+                screens: {},
             },
             NotFound: "*",
         },
